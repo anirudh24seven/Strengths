@@ -195,7 +195,16 @@ public class ToDoActivity extends Activity {
 					}
 
 				} else {
-					createAndShowDialog(exception, "Error");
+                    String msg = exception.getCause().getMessage();
+                    String couldNotConnectMessage = "Unable to resolve host \"strengths.azure-mobile.net\": No address associated with hostname";
+                    if (msg.equals(couldNotConnectMessage))
+                    {
+                        createAndShowDialog(getResources().getString(R.string.check_connection), "Error");
+                    }
+                    else
+                    {
+					    createAndShowDialog(exception, "Error");
+                    }
 				}
 			}
 		});
